@@ -3,7 +3,6 @@ import map from 'lodash/map';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchBlogs } from '../../actions';
-
 class BlogList extends Component {
   componentDidMount() {
     this.props.fetchBlogs();
@@ -12,14 +11,17 @@ class BlogList extends Component {
   renderBlogs() {
     return map(this.props.blogs, blog => {
       return (
-        <div className="card darken-1 horizontal" key={blog._id}>
-          <div className="card-stacked">
-            <div className="card-content">
-              <span className="card-title">{blog.title}</span>
-              <p>{blog.content}</p>
-            </div>
-            <div className="card-action">
-              <Link to={`/blogs/${blog._id}`}>Read</Link>
+        <div className='container' >
+
+          <div className="card darken-1 horizontal" key={blog._id}>
+            <div className="card-stacked">
+              <div className="card-content">
+                <span className="card-title">{blog.title}</span>
+                <p>{blog.content}</p>
+              </div>
+              <div className="card-action">
+                <Link to={`/blogs/${blog._id}`}>Read</Link>
+              </div>
             </div>
           </div>
         </div>

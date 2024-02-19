@@ -14,8 +14,25 @@ module.exports = app => {
   });
 
   app.get('/api/blogs', requireLogin, async (req, res) => {
-    const blogs = await Blog.find({ _user: req.user.id });
 
+    // Basic Cahsing Setup Using Redis Node
+    // If data exits in redis based on th eus er id than we are gonna go through sending it other wise we are gonna send the direct mongo db thing
+    const redis = require('redis');
+    const redisUrl = 'redis://127.0.0.1:6379'
+
+    const client = redis.createClient(redisUrl);
+    const util = require('util');
+    client.get = util.promisify(client.get);
+    const data = await client.get(req.user.id)
+
+    if (data) {
+      console.log("Returning From Cashed Data");
+      return res.json(JSON.parse(data));
+    }
+
+    const blogs = await Blog.find({ _user: req.user.id });
+    client.set(req.user.id, JSON.stringify(blogs));
+    console.log("Returning From Mongo DB");
     res.send(blogs);
   });
 

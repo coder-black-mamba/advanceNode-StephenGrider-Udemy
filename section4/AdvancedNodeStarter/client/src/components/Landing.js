@@ -4,9 +4,9 @@ const Landing = () => {
   return (
     <div style={{ textAlign: 'center' }}>
       <h1>
-        Blogster!
+        FuckStar!
       </h1>
-      Write private blogs
+      I No One But blackMamba 🖕
     </div>
   );
 };

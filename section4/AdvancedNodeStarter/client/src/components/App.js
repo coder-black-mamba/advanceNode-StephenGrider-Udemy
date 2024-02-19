@@ -8,7 +8,6 @@ import Landing from './Landing';
 import Dashboard from './Dashboard';
 import BlogNew from './blogs/BlogNew';
 import BlogShow from './blogs/BlogShow';
-
 class App extends Component {
   componentDidMount() {
     this.props.fetchUser();
@@ -16,7 +15,6 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container">
         <BrowserRouter>
           <div>
             <Header />
@@ -28,7 +26,6 @@ class App extends Component {
             </Switch>
           </div>
         </BrowserRouter>
-      </div>
     );
   }
 }
